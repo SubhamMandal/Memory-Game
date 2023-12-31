@@ -1,0 +1,44 @@
+.main {
+  background-image: url("../static/Images/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.header {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman",
+    "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
+    sans-serif;
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.console {
+  display: flex;
+  /* background-color: rebeccapurple; */
+  /* width: 60%; */
+  justify-content: space-between;
+}
+
+
+@media screen and (max-width: 600px) {
+    .console {
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    .header {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,91 @@
+summary {
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  height: 80vh;
+  max-height: 30rem;
+  width: 95vw;
+  max-width: 50rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.banner {
+  width: 70%;
+  /* min-width: 25rem; */
+  height: 20rem;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -55%);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 60%;
+  /* justify-content: space-between; */
+  gap: 1rem;
+  /* background-color: aqua; */
+}
+
+.result {
+  font-size: 2.5rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: purple;
+}
+
+.stars {
+  height: 6rem;
+  filter: drop-shadow(2px 2px 0 black) drop-shadow(-1px -1px 0 white);
+}
+
+.emptyStars {
+    filter: opacity(0.3) drop-shadow(0 0 0 blue);
+}
+
+.stars > img {
+  height: 100%;
+}
+
+.stars::after,
+.stars::before {
+  /* content: url("../static/Images/goldStar.png"); */
+  content: "";
+  position: relative;
+  bottom: -0.5rem;
+  background-image: url("../static/Images/goldStar.png");
+  background-size: 100% 100%;
+  display: inline-block;
+  height: 5rem;
+  width: 5rem;
+}
+
+.restart {
+    position: absolute;
+    background-image: url('../static/Images/quick\ restart.png');
+    bottom: -2rem;
+    translate: (-50%, -50%);
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    cursor: pointer;
+    /* background-color: aqua; */
+}
+
+@media screen and (max-width: 600px) {
+    .banner {
+        height: 12rem;
+    }
+
+    .result {
+        font-size: 1.5rem;
+    }
+}
