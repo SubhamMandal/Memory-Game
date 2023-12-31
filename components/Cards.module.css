@@ -1,0 +1,41 @@
+section {
+    width: 90%;
+    max-width: 65rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.card {
+    height: 9rem;
+    width: 9rem;
+    display: flex;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    padding: .3rem;
+    transition: transform .5s;
+    transform-style: preserve-3d;
+}
+
+.front {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+}
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+/* @media screen and (min-width: 900px) {
+    section {
+        width: 70%;
+    }
+} */
