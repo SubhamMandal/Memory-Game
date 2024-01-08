@@ -6,6 +6,7 @@ import Cards from './Cards';
 import { useEffect, useState } from 'react';
 import Modal from './Modal';
 import InfoCard from './InfoCard';
+import StartModal from './StartModal';
 
 const totalTime = 60;
 let interval;
@@ -14,17 +15,18 @@ const Game = () => {
     const [timer, setTimer] = useState(totalTime);
     const [flipCount, setFlipCount] = useState(0);
     const [score, setScore] = useState(0);
+    const [isStarted, setIsStarted] = useState(false);
     const flipHandler = (matched) => {
         setFlipCount(flipCount => flipCount + 1);
         matched ? setScore(score + 10) : setScore(score - 5);
     }
 
     useEffect(() => {
-        if (!result) {
+        if (!result && isStarted) {
             interval = setInterval(() => setTimer(time => time ? time - 1 : time), 1000);
         }
         return () => clearInterval(interval);
-    }, [result]);
+    }, [result, isStarted]);
 
     useEffect(() => {
         if (timer <= 0) {
@@ -47,6 +49,7 @@ const Game = () => {
 
     return (
         <main className={`${classes.main} ${result && classes.fixed}`}>
+            {!isStarted && <StartModal startGame={() => setIsStarted(true)}/>}
             <header className={classes.header}>Memory Game</header>
             <article className={classes.console}>
                 <InfoCard infoImg={Medal} value={score} infoTitle={'Score'} />
@@ -54,8 +57,7 @@ const Game = () => {
                 <InfoCard infoImg={Timer} value={timer} infoTitle={'Timer'} />
             </article>
             <Cards flipMatched={flipHandler} handleWin={winHandler} result={result} />
-            {result && 
-            <Modal score={score} flipCount={flipCount} result={result} reset={resetHandler} />}
+            {result && <Modal score={score} flipCount={flipCount} result={result} reset={resetHandler} />}
         </main>
     );
 }

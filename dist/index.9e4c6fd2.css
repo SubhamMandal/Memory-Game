@@ -1,6 +1,8 @@
+@import "https://fonts.googleapis.com/css2?family=Salsa&display=swap";
 * {
   margin: 0;
   padding: 0;
+  font-family: Salsa, cursive !important;
 }
 
 #root {
@@ -82,40 +84,6 @@ section {
 
 .Ovzx_q_flipped {
   transform: rotateY(180deg);
-}
-
-.t3CAGW_infoCard {
-  align-items: center;
-  margin: 0 1rem;
-  display: flex;
-}
-
-.t3CAGW_infoImg {
-  z-index: 1;
-  background-color: #fff;
-  border: 2px solid #9c9a9a;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-  width: 5rem;
-  height: 5rem;
-  display: flex;
-  position: relative;
-}
-
-.t3CAGW_infoImg > img {
-  width: 60%;
-  padding: 1rem;
-}
-
-.t3CAGW_infoTitle {
-  background-color: #fff;
-  border: 2px solid #9c9a9a;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  margin-left: -1rem;
-  padding: .5rem 1.5rem .5rem 1rem;
-  font-size: 1.5rem;
 }
 
 summary {
@@ -202,6 +170,103 @@ summary {
   .VKUWmq_result {
     font-size: 1.5rem;
   }
+}
+
+.t3CAGW_infoCard {
+  align-items: center;
+  margin: 0 1rem;
+  display: flex;
+}
+
+.t3CAGW_infoImg {
+  z-index: 1;
+  background-color: #fff;
+  border: 2px solid #9c9a9a;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  position: relative;
+}
+
+.t3CAGW_infoImg > img {
+  width: 60%;
+  padding: 1rem;
+}
+
+.t3CAGW_infoTitle {
+  background-color: #fff;
+  border: 2px solid #9c9a9a;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  margin-left: -1rem;
+  padding: .5rem 1.5rem .5rem 1rem;
+  font-size: 1.5rem;
+}
+
+.-deY5G_modal {
+  z-index: 2;
+  background: #fff url("memoryBg1.135200f6.jpg") center / cover no-repeat;
+  border-radius: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95vw;
+  max-width: 50rem;
+  height: 80vh;
+  max-height: 30rem;
+  display: flex;
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 8px #0006, 0 6px 20px #0000004d;
+}
+
+.-deY5G_header {
+  text-align: center;
+  margin: 0 0 2rem;
+}
+
+.-deY5G_header > img {
+  width: 0;
+  animation: 1s linear 1s forwards -deY5G_header;
+}
+
+@keyframes -deY5G_header {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 15rem;
+  }
+}
+
+.-deY5G_line {
+  text-align: center;
+  color: #0d0324;
+  text-shadow: 2px 2px red;
+  font-size: 2rem;
+}
+
+.-deY5G_start {
+  color: red;
+  text-shadow: 2px 2px #000;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  padding: .5rem;
+  font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
+  font-size: 1.5rem;
+  transition: all .5s;
+  box-shadow: 3px 4px 5px #000;
+}
+
+.-deY5G_start:hover {
+  cursor: pointer;
+  transform: scale(1.5);
 }
 
 /*# sourceMappingURL=index.9e4c6fd2.css.map */

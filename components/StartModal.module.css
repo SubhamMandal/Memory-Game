@@ -1,0 +1,62 @@
+.modal {
+  position: absolute;
+  background: url('../static/Images/memoryBg1.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 2;
+  background-color: white;
+  height: 80vh;
+  max-height: 30rem;
+  width: 95vw;
+  max-width: 50rem;
+  border-radius: 2rem;
+  top: 50vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.header {
+    text-align: center;
+    margin: 0rem 0 2rem 0;
+}
+
+.header > img {
+    width: 0;
+    animation: header 1s 1s linear forwards;
+}
+
+@keyframes header {
+    0% {width: 0rem;}
+    100% {width: 15rem;}
+}
+
+
+.line {
+    text-align: center;
+    font-size: 2rem;
+    color: rgb(13, 3, 36);
+    text-shadow: 2px 2px #ff0000;
+}
+
+.start {
+    padding: .5rem;
+    color: rgb(255, 0, 0);
+    text-shadow: 2px 2px black;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    transition: all .5s;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-shadow: 3px 4px 5px black;
+}
+
+.start:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+}

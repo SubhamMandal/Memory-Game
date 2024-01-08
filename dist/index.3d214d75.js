@@ -2960,7 +2960,7 @@ root.render(/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _appDefault.default), {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./App":"2Ew96"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom/client":"lOjBx","./App":"2Ew96","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("ee51401569654d91");
 
@@ -27147,175 +27147,7 @@ module.exports = require("ef03b89c8fe2794e");
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
 })();
 
-},{}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"km3Ru":[function(require,module,exports) {
-"use strict";
-var Refresh = require("7422ead32dcc1e6b");
-function debounce(func, delay) {
-    {
-        let timeout = undefined;
-        let lastTime = 0;
-        return function(args) {
-            // Call immediately if last call was more than the delay ago.
-            // Otherwise, set a timeout. This means the first call is fast
-            // (for the common case of a single update), and subsequent updates
-            // are batched.
-            let now = Date.now();
-            if (now - lastTime > delay) {
-                lastTime = now;
-                func.call(null, args);
-            } else {
-                clearTimeout(timeout);
-                timeout = setTimeout(function() {
-                    timeout = undefined;
-                    lastTime = Date.now();
-                    func.call(null, args);
-                }, delay);
-            }
-        };
-    }
-}
-var enqueueUpdate = debounce(function() {
-    Refresh.performReactRefresh();
-}, 30);
-// Everthing below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function(module1) {
-    window.$RefreshReg$ = function(type, id) {
-        Refresh.register(type, module1.id + " " + id);
-    };
-    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function(module1) {
-    if (isReactRefreshBoundary(module1.exports)) {
-        registerExportsForReactRefresh(module1);
-        if (module1.hot) {
-            module1.hot.dispose(function(data) {
-                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
-                data.prevExports = module1.exports;
-            });
-            module1.hot.accept(function(getParents) {
-                var prevExports = module1.hot.data.prevExports;
-                var nextExports = module1.exports;
-                // Since we just executed the code for it, it's possible
-                // that the new exports make it ineligible for being a boundary.
-                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
-                // It can also become ineligible if its exports are incompatible
-                // with the previous exports.
-                // For example, if you add/remove/change exports, we'll want
-                // to re-execute the importing modules, and force those components
-                // to re-render. Similarly, if you convert a class component
-                // to a function, we want to invalidate the boundary.
-                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-                if (isNoLongerABoundary || didInvalidate) {
-                    // We'll be conservative. The only case in which we won't do a full
-                    // reload is if all parent modules are also refresh boundaries.
-                    // In that case we'll add them to the current queue.
-                    var parents = getParents();
-                    if (parents.length === 0) {
-                        // Looks like we bubbled to the root. Can't recover from that.
-                        window.location.reload();
-                        return;
-                    }
-                    return parents;
-                }
-                enqueueUpdate();
-            });
-        }
-    }
-};
-function isReactRefreshBoundary(exports) {
-    if (Refresh.isLikelyComponentType(exports)) return true;
-    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
-    return false;
-    var hasExports = false;
-    var areAllExportsComponents = true;
-    let isESM = "__esModule" in exports;
-    for(var key in exports){
-        hasExports = true;
-        if (key === "__esModule") continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
-        return false;
-        var exportValue = exports[key];
-        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
-    }
-    return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-    var prevSignature = getRefreshBoundarySignature(prevExports);
-    var nextSignature = getRefreshBoundarySignature(nextExports);
-    if (prevSignature.length !== nextSignature.length) return true;
-    for(var i = 0; i < nextSignature.length; i++){
-        if (prevSignature[i] !== nextSignature[i]) return true;
-    }
-    return false;
-}
-// When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-    var signature = [];
-    signature.push(Refresh.getFamilyByType(exports));
-    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-    let isESM = "__esModule" in exports;
-    for(var key in exports){
-        if (key === "__esModule") continue;
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        signature.push(key);
-        signature.push(Refresh.getFamilyByType(exportValue));
-    }
-    return signature;
-}
-function registerExportsForReactRefresh(module1) {
-    var exports = module1.exports, id = module1.id;
-    Refresh.register(exports, id + " %exports%");
-    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-    let isESM = "__esModule" in exports;
-    for(var key in exports){
-        var desc = Object.getOwnPropertyDescriptor(exports, key);
-        if (desc && desc.get && !isESM) continue;
-        var exportValue = exports[key];
-        var typeID = id + " %exports% " + key;
-        Refresh.register(exportValue, typeID);
-    }
-}
-
-},{"7422ead32dcc1e6b":"786KC"}],"2Ew96":[function(require,module,exports) {
+},{}],"2Ew96":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$c1db = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -27344,7 +27176,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/Game":"jtZfy"}],"jtZfy":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./components/Game":"jtZfy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jtZfy":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$df23 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -27369,6 +27201,8 @@ var _modal = require("./Modal");
 var _modalDefault = parcelHelpers.interopDefault(_modal);
 var _infoCard = require("./InfoCard");
 var _infoCardDefault = parcelHelpers.interopDefault(_infoCard);
+var _startModal = require("./StartModal");
+var _startModalDefault = parcelHelpers.interopDefault(_startModal);
 var _s = $RefreshSig$();
 const totalTime = 60;
 let interval;
@@ -27378,15 +27212,17 @@ const Game = ()=>{
     const [timer, setTimer] = (0, _react.useState)(totalTime);
     const [flipCount, setFlipCount] = (0, _react.useState)(0);
     const [score, setScore] = (0, _react.useState)(0);
+    const [isStarted, setIsStarted] = (0, _react.useState)(false);
     const flipHandler = (matched)=>{
         setFlipCount((flipCount)=>flipCount + 1);
         matched ? setScore(score + 10) : setScore(score - 5);
     };
     (0, _react.useEffect)(()=>{
-        if (!result) interval = setInterval(()=>setTimer((time)=>time ? time - 1 : time), 1000);
+        if (!result && isStarted) interval = setInterval(()=>setTimer((time)=>time ? time - 1 : time), 1000);
         return ()=>clearInterval(interval);
     }, [
-        result
+        result,
+        isStarted
     ]);
     (0, _react.useEffect)(()=>{
         if (timer <= 0) {
@@ -27409,12 +27245,19 @@ const Game = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
         className: `${(0, _gameModuleCssDefault.default).main} ${result && (0, _gameModuleCssDefault.default).fixed}`,
         children: [
+            !isStarted && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _startModalDefault.default), {
+                startGame: ()=>setIsStarted(true)
+            }, void 0, false, {
+                fileName: "components/Game.js",
+                lineNumber: 52,
+                columnNumber: 28
+            }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("header", {
                 className: (0, _gameModuleCssDefault.default).header,
                 children: "Memory Game"
             }, void 0, false, {
                 fileName: "components/Game.js",
-                lineNumber: 50,
+                lineNumber: 53,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("article", {
@@ -27426,7 +27269,7 @@ const Game = ()=>{
                         infoTitle: "Score"
                     }, void 0, false, {
                         fileName: "components/Game.js",
-                        lineNumber: 52,
+                        lineNumber: 55,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoCardDefault.default), {
@@ -27435,7 +27278,7 @@ const Game = ()=>{
                         infoTitle: "Flips"
                     }, void 0, false, {
                         fileName: "components/Game.js",
-                        lineNumber: 53,
+                        lineNumber: 56,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoCardDefault.default), {
@@ -27444,13 +27287,13 @@ const Game = ()=>{
                         infoTitle: "Timer"
                     }, void 0, false, {
                         fileName: "components/Game.js",
-                        lineNumber: 54,
+                        lineNumber: 57,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "components/Game.js",
-                lineNumber: 51,
+                lineNumber: 54,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardsDefault.default), {
@@ -27459,7 +27302,7 @@ const Game = ()=>{
                 result: result
             }, void 0, false, {
                 fileName: "components/Game.js",
-                lineNumber: 56,
+                lineNumber: 59,
                 columnNumber: 13
             }, undefined),
             result && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _modalDefault.default), {
@@ -27469,17 +27312,17 @@ const Game = ()=>{
                 reset: resetHandler
             }, void 0, false, {
                 fileName: "components/Game.js",
-                lineNumber: 58,
-                columnNumber: 13
+                lineNumber: 60,
+                columnNumber: 24
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "components/Game.js",
-        lineNumber: 49,
+        lineNumber: 51,
         columnNumber: 9
     }, undefined);
 };
-_s(Game, "q52sUKDVwURBcfr2bOT99GLmYgQ=");
+_s(Game, "0v1FxJrQ6+l3zEGqGhOldntXFzY=");
 _c = Game;
 exports.default = Game;
 var _c;
@@ -27490,7 +27333,7 @@ $RefreshReg$(_c, "Game");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Game.module.css":"kQSb3","../static/Images/medal.png":"iAg4u","../static/Images/flip.png":"dhPfV","../static/Images/timer.png":"ggzsV","./Cards":"1ZgNj","react":"21dqq","./Modal":"iUclv","./InfoCard":"jggN1"}],"kQSb3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./Game.module.css":"kQSb3","../static/Images/medal.png":"iAg4u","../static/Images/flip.png":"dhPfV","../static/Images/timer.png":"ggzsV","./Cards":"1ZgNj","react":"21dqq","./Modal":"iUclv","./InfoCard":"jggN1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./StartModal":"b0H6r"}],"kQSb3":[function(require,module,exports) {
 module.exports["console"] = `_6WX1Ca_console`;
 module.exports["fixed"] = `_6WX1Ca_fixed`;
 module.exports["header"] = `_6WX1Ca_header`;
@@ -27677,13 +27520,7 @@ $RefreshReg$(_c1, "Card");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./Cards.module.css":"bA6eq","../static/constants":"5tZ8v","react":"21dqq","../static/Images/star.png":"3cKau"}],"bA6eq":[function(require,module,exports) {
-module.exports["back"] = `Ovzx_q_back`;
-module.exports["card"] = `Ovzx_q_card`;
-module.exports["flipped"] = `Ovzx_q_flipped`;
-module.exports["front"] = `Ovzx_q_front`;
-
-},{}],"5tZ8v":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../static/constants":"5tZ8v","../static/Images/star.png":"3cKau","./Cards.module.css":"bA6eq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"5tZ8v":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "allCards", ()=>allCards);
@@ -27726,7 +27563,7 @@ const allCards = [
     }
 ];
 
-},{"./Images/bathtub.png":"2lnm3","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Images/bag.png":"df2VI","./Images/boat.png":"2j02R","./Images/building.png":"9IiK4","./Images/train.png":"5RicJ","./Images/wine.png":"4zCys"}],"2lnm3":[function(require,module,exports) {
+},{"./Images/bathtub.png":"2lnm3","./Images/bag.png":"df2VI","./Images/boat.png":"2j02R","./Images/building.png":"9IiK4","./Images/train.png":"5RicJ","./Images/wine.png":"4zCys","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2lnm3":[function(require,module,exports) {
 module.exports = require("3565cd99e49f87b5").getBundleURL("UckoE") + "bathtub.8890b420.png" + "?" + Date.now();
 
 },{"3565cd99e49f87b5":"lgJ39"}],"df2VI":[function(require,module,exports) {
@@ -27744,10 +27581,184 @@ module.exports = require("fd7d8ec5163431e3").getBundleURL("UckoE") + "train.3572
 },{"fd7d8ec5163431e3":"lgJ39"}],"4zCys":[function(require,module,exports) {
 module.exports = require("6cccf5719ecfb60b").getBundleURL("UckoE") + "wine.d40098ca.png" + "?" + Date.now();
 
-},{"6cccf5719ecfb60b":"lgJ39"}],"3cKau":[function(require,module,exports) {
+},{"6cccf5719ecfb60b":"lgJ39"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"3cKau":[function(require,module,exports) {
 module.exports = require("729ddd0a1b944b79").getBundleURL("UckoE") + "star.e7514dcd.png" + "?" + Date.now();
 
-},{"729ddd0a1b944b79":"lgJ39"}],"iUclv":[function(require,module,exports) {
+},{"729ddd0a1b944b79":"lgJ39"}],"bA6eq":[function(require,module,exports) {
+module.exports["back"] = `Ovzx_q_back`;
+module.exports["card"] = `Ovzx_q_card`;
+module.exports["flipped"] = `Ovzx_q_flipped`;
+module.exports["front"] = `Ovzx_q_front`;
+
+},{}],"km3Ru":[function(require,module,exports) {
+"use strict";
+var Refresh = require("7422ead32dcc1e6b");
+function debounce(func, delay) {
+    {
+        let timeout = undefined;
+        let lastTime = 0;
+        return function(args) {
+            // Call immediately if last call was more than the delay ago.
+            // Otherwise, set a timeout. This means the first call is fast
+            // (for the common case of a single update), and subsequent updates
+            // are batched.
+            let now = Date.now();
+            if (now - lastTime > delay) {
+                lastTime = now;
+                func.call(null, args);
+            } else {
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    timeout = undefined;
+                    lastTime = Date.now();
+                    func.call(null, args);
+                }, delay);
+            }
+        };
+    }
+}
+var enqueueUpdate = debounce(function() {
+    Refresh.performReactRefresh();
+}, 30);
+// Everthing below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function(module1) {
+    window.$RefreshReg$ = function(type, id) {
+        Refresh.register(type, module1.id + " " + id);
+    };
+    window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+};
+module.exports.postlude = function(module1) {
+    if (isReactRefreshBoundary(module1.exports)) {
+        registerExportsForReactRefresh(module1);
+        if (module1.hot) {
+            module1.hot.dispose(function(data) {
+                if (Refresh.hasUnrecoverableErrors()) window.location.reload();
+                data.prevExports = module1.exports;
+            });
+            module1.hot.accept(function(getParents) {
+                var prevExports = module1.hot.data.prevExports;
+                var nextExports = module1.exports;
+                // Since we just executed the code for it, it's possible
+                // that the new exports make it ineligible for being a boundary.
+                var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
+                // It can also become ineligible if its exports are incompatible
+                // with the previous exports.
+                // For example, if you add/remove/change exports, we'll want
+                // to re-execute the importing modules, and force those components
+                // to re-render. Similarly, if you convert a class component
+                // to a function, we want to invalidate the boundary.
+                var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+                if (isNoLongerABoundary || didInvalidate) {
+                    // We'll be conservative. The only case in which we won't do a full
+                    // reload is if all parent modules are also refresh boundaries.
+                    // In that case we'll add them to the current queue.
+                    var parents = getParents();
+                    if (parents.length === 0) {
+                        // Looks like we bubbled to the root. Can't recover from that.
+                        window.location.reload();
+                        return;
+                    }
+                    return parents;
+                }
+                enqueueUpdate();
+            });
+        }
+    }
+};
+function isReactRefreshBoundary(exports) {
+    if (Refresh.isLikelyComponentType(exports)) return true;
+    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
+    return false;
+    var hasExports = false;
+    var areAllExportsComponents = true;
+    let isESM = "__esModule" in exports;
+    for(var key in exports){
+        hasExports = true;
+        if (key === "__esModule") continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) // Don't invoke getters for CJS as they may have side effects.
+        return false;
+        var exportValue = exports[key];
+        if (!Refresh.isLikelyComponentType(exportValue)) areAllExportsComponents = false;
+    }
+    return hasExports && areAllExportsComponents;
+}
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+    var prevSignature = getRefreshBoundarySignature(prevExports);
+    var nextSignature = getRefreshBoundarySignature(nextExports);
+    if (prevSignature.length !== nextSignature.length) return true;
+    for(var i = 0; i < nextSignature.length; i++){
+        if (prevSignature[i] !== nextSignature[i]) return true;
+    }
+    return false;
+}
+// When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+    var signature = [];
+    signature.push(Refresh.getFamilyByType(exports));
+    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+    let isESM = "__esModule" in exports;
+    for(var key in exports){
+        if (key === "__esModule") continue;
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        signature.push(key);
+        signature.push(Refresh.getFamilyByType(exportValue));
+    }
+    return signature;
+}
+function registerExportsForReactRefresh(module1) {
+    var exports = module1.exports, id = module1.id;
+    Refresh.register(exports, id + " %exports%");
+    if (exports == null || typeof exports !== "object") // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+    let isESM = "__esModule" in exports;
+    for(var key in exports){
+        var desc = Object.getOwnPropertyDescriptor(exports, key);
+        if (desc && desc.get && !isESM) continue;
+        var exportValue = exports[key];
+        var typeID = id + " %exports% " + key;
+        Refresh.register(exportValue, typeID);
+    }
+}
+
+},{"7422ead32dcc1e6b":"786KC"}],"iUclv":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f319 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -27856,7 +27867,15 @@ $RefreshReg$(_c, "Modal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../static/Images/gameOver.png":"jMDx3","./InfoCard":"jggN1","../static/Images/medal.png":"iAg4u","../static/Images/flip.png":"dhPfV","../static/Images/goldStar.png":"88zwT","./Modal.module.css":"enDLm"}],"jMDx3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./Modal.module.css":"enDLm","../static/Images/gameOver.png":"jMDx3","./InfoCard":"jggN1","../static/Images/medal.png":"iAg4u","../static/Images/flip.png":"dhPfV","../static/Images/goldStar.png":"88zwT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"enDLm":[function(require,module,exports) {
+module.exports["banner"] = `VKUWmq_banner`;
+module.exports["content"] = `VKUWmq_content`;
+module.exports["emptyStars"] = `VKUWmq_emptyStars`;
+module.exports["restart"] = `VKUWmq_restart`;
+module.exports["result"] = `VKUWmq_result`;
+module.exports["stars"] = `VKUWmq_stars`;
+
+},{}],"jMDx3":[function(require,module,exports) {
 module.exports = require("e13c8687fb97424d").getBundleURL("UckoE") + "gameOver.694e5f12.png" + "?" + Date.now();
 
 },{"e13c8687fb97424d":"lgJ39"}],"jggN1":[function(require,module,exports) {
@@ -27914,7 +27933,7 @@ $RefreshReg$(_c, "InfoCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./InfoCard.module.css":"kdbdF"}],"kdbdF":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./InfoCard.module.css":"kdbdF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"kdbdF":[function(require,module,exports) {
 module.exports["infoCard"] = `t3CAGW_infoCard`;
 module.exports["infoImg"] = `t3CAGW_infoImg`;
 module.exports["infoTitle"] = `t3CAGW_infoTitle`;
@@ -27922,14 +27941,84 @@ module.exports["infoTitle"] = `t3CAGW_infoTitle`;
 },{}],"88zwT":[function(require,module,exports) {
 module.exports = require("883ef188507aef12").getBundleURL("UckoE") + "goldStar.f6241c66.png" + "?" + Date.now();
 
-},{"883ef188507aef12":"lgJ39"}],"enDLm":[function(require,module,exports) {
-module.exports["banner"] = `VKUWmq_banner`;
-module.exports["content"] = `VKUWmq_content`;
-module.exports["emptyStars"] = `VKUWmq_emptyStars`;
-module.exports["restart"] = `VKUWmq_restart`;
-module.exports["result"] = `VKUWmq_result`;
-module.exports["stars"] = `VKUWmq_stars`;
+},{"883ef188507aef12":"lgJ39"}],"b0H6r":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$7490 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$7490.prelude(module);
 
-},{}]},["3smKr","1xC6H","bB7Pu"], "bB7Pu", "parcelRequire9fdc")
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _startModalModuleCss = require("./StartModal.module.css");
+var _startModalModuleCssDefault = parcelHelpers.interopDefault(_startModalModuleCss);
+var _headerPng = require("../static/Images/header.png");
+var _headerPngDefault = parcelHelpers.interopDefault(_headerPng);
+const StartModal = ({ startGame })=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: (0, _startModalModuleCssDefault.default).modal,
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: (0, _startModalModuleCssDefault.default).header,
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: (0, _headerPngDefault.default)
+                }, void 0, false, {
+                    fileName: "components/StartModal.js",
+                    lineNumber: 9,
+                    columnNumber: 17
+                }, undefined)
+            }, void 0, false, {
+                fileName: "components/StartModal.js",
+                lineNumber: 8,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: (0, _startModalModuleCssDefault.default).line,
+                children: "Ready to test your Memory?"
+            }, void 0, false, {
+                fileName: "components/StartModal.js",
+                lineNumber: 11,
+                columnNumber: 13
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: (0, _startModalModuleCssDefault.default).start,
+                onClick: startGame,
+                children: "Start"
+            }, void 0, false, {
+                fileName: "components/StartModal.js",
+                lineNumber: 12,
+                columnNumber: 13
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "components/StartModal.js",
+        lineNumber: 7,
+        columnNumber: 9
+    }, undefined);
+};
+_c = StartModal;
+exports.default = StartModal;
+var _c;
+$RefreshReg$(_c, "StartModal");
+
+  $parcel$ReactRefreshHelpers$7490.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./StartModal.module.css":"hSn6H","../static/Images/header.png":"3CU6v"}],"hSn6H":[function(require,module,exports) {
+module.exports["header"] = `-deY5G_header`;
+module.exports["header"];
+module.exports["line"] = `-deY5G_line`;
+module.exports["modal"] = `-deY5G_modal`;
+module.exports["start"] = `-deY5G_start`;
+
+},{}],"3CU6v":[function(require,module,exports) {
+module.exports = require("72c4aa3c09143cb8").getBundleURL("UckoE") + "header.acabb4fb.png" + "?" + Date.now();
+
+},{"72c4aa3c09143cb8":"lgJ39"}]},["3smKr","1xC6H","bB7Pu"], "bB7Pu", "parcelRequire9fdc")
 
 //# sourceMappingURL=index.3d214d75.js.map
