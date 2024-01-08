@@ -228,6 +228,8 @@ summary {
 .-deY5G_header {
   text-align: center;
   margin: 0 0 2rem;
+  position: absolute;
+  top: 20%;
 }
 
 .-deY5G_header > img {
@@ -250,22 +252,25 @@ summary {
   color: #0d0324;
   text-shadow: 2px 2px red;
   font-size: 2rem;
+  position: relative;
+  top: 10%;
 }
 
-.-deY5G_start {
-  color: red;
-  text-shadow: 2px 2px #000;
-  border-radius: 1rem;
-  margin-top: 1rem;
-  padding: .5rem;
-  font-family: Franklin Gothic Medium, Arial Narrow, Arial, sans-serif;
-  font-size: 1.5rem;
-  transition: all .5s;
-  box-shadow: 3px 4px 5px #000;
-}
-
-.-deY5G_start:hover {
+.-deY5G_play {
   cursor: pointer;
+  width: 5rem;
+  margin-top: 2rem;
+  position: relative;
+  top: 10%;
+}
+
+.-deY5G_play > img {
+  filter: drop-shadow(20px 20px 3px #00000050);
+  width: 100%;
+  transition: all 1s;
+}
+
+.-deY5G_play:hover > img {
   transform: scale(1.5);
 }
 

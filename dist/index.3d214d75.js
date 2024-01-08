@@ -27243,7 +27243,7 @@ const Game = ()=>{
         setScore(0);
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
-        className: `${(0, _gameModuleCssDefault.default).main} ${result && (0, _gameModuleCssDefault.default).fixed}`,
+        className: `${(0, _gameModuleCssDefault.default).main} ${(result || !isStarted) && (0, _gameModuleCssDefault.default).fixed}`,
         children: [
             !isStarted && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _startModalDefault.default), {
                 startGame: ()=>setIsStarted(true)
@@ -27957,6 +27957,8 @@ var _startModalModuleCss = require("./StartModal.module.css");
 var _startModalModuleCssDefault = parcelHelpers.interopDefault(_startModalModuleCss);
 var _headerPng = require("../static/Images/header.png");
 var _headerPngDefault = parcelHelpers.interopDefault(_headerPng);
+var _playPng = require("../static/Images/play.png");
+var _playPngDefault = parcelHelpers.interopDefault(_playPng);
 const StartModal = ({ startGame })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: (0, _startModalModuleCssDefault.default).modal,
@@ -27967,12 +27969,12 @@ const StartModal = ({ startGame })=>{
                     src: (0, _headerPngDefault.default)
                 }, void 0, false, {
                     fileName: "components/StartModal.js",
-                    lineNumber: 9,
+                    lineNumber: 10,
                     columnNumber: 17
                 }, undefined)
             }, void 0, false, {
                 fileName: "components/StartModal.js",
-                lineNumber: 8,
+                lineNumber: 9,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27980,22 +27982,28 @@ const StartModal = ({ startGame })=>{
                 children: "Ready to test your Memory?"
             }, void 0, false, {
                 fileName: "components/StartModal.js",
-                lineNumber: 11,
+                lineNumber: 12,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: (0, _startModalModuleCssDefault.default).start,
+                className: (0, _startModalModuleCssDefault.default).play,
                 onClick: startGame,
-                children: "Start"
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
+                    src: (0, _playPngDefault.default)
+                }, void 0, false, {
+                    fileName: "components/StartModal.js",
+                    lineNumber: 13,
+                    columnNumber: 63
+                }, undefined)
             }, void 0, false, {
                 fileName: "components/StartModal.js",
-                lineNumber: 12,
+                lineNumber: 13,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "components/StartModal.js",
-        lineNumber: 7,
+        lineNumber: 8,
         columnNumber: 9
     }, undefined);
 };
@@ -28009,16 +28017,19 @@ $RefreshReg$(_c, "StartModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./StartModal.module.css":"hSn6H","../static/Images/header.png":"3CU6v"}],"hSn6H":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./StartModal.module.css":"hSn6H","../static/Images/header.png":"3CU6v","../static/Images/play.png":"7qeGL"}],"hSn6H":[function(require,module,exports) {
 module.exports["header"] = `-deY5G_header`;
 module.exports["header"];
 module.exports["line"] = `-deY5G_line`;
 module.exports["modal"] = `-deY5G_modal`;
-module.exports["start"] = `-deY5G_start`;
+module.exports["play"] = `-deY5G_play`;
 
 },{}],"3CU6v":[function(require,module,exports) {
 module.exports = require("72c4aa3c09143cb8").getBundleURL("UckoE") + "header.acabb4fb.png" + "?" + Date.now();
 
-},{"72c4aa3c09143cb8":"lgJ39"}]},["3smKr","1xC6H","bB7Pu"], "bB7Pu", "parcelRequire9fdc")
+},{"72c4aa3c09143cb8":"lgJ39"}],"7qeGL":[function(require,module,exports) {
+module.exports = require("842b3699e44eb24f").getBundleURL("UckoE") + "play.48d43211.png" + "?" + Date.now();
+
+},{"842b3699e44eb24f":"lgJ39"}]},["3smKr","1xC6H","bB7Pu"], "bB7Pu", "parcelRequire9fdc")
 
 //# sourceMappingURL=index.3d214d75.js.map

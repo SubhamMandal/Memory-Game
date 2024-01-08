@@ -24,6 +24,8 @@
 .header {
     text-align: center;
     margin: 0rem 0 2rem 0;
+    position: absolute;
+    top: 20%;
 }
 
 .header > img {
@@ -38,25 +40,28 @@
 
 
 .line {
+    position: relative;
+    top: 10%;
     text-align: center;
     font-size: 2rem;
     color: rgb(13, 3, 36);
     text-shadow: 2px 2px #ff0000;
 }
 
-.start {
-    padding: .5rem;
-    color: rgb(255, 0, 0);
-    text-shadow: 2px 2px black;
-    border-radius: 1rem;
-    margin-top: 1rem;
-    font-size: 1.5rem;
-    transition: all .5s;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    box-shadow: 3px 4px 5px black;
+.play {
+    margin-top: 2rem;
+    width: 5rem;
+    cursor: pointer;
+    position: relative;
+    top: 10%;
 }
 
-.start:hover {
+.play > img {
+    width: 100%;
+    transition: all 1s;
+    filter: drop-shadow(20px 20px 3px rgba(0, 0, 0, 0.313));
+}
+
+.play:hover > img {
     transform: scale(1.5);
-    cursor: pointer;
 }

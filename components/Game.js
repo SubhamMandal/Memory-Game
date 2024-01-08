@@ -48,7 +48,7 @@ const Game = () => {
     }
 
     return (
-        <main className={`${classes.main} ${result && classes.fixed}`}>
+        <main className={`${classes.main} ${(result || !isStarted) && classes.fixed}`}>
             {!isStarted && <StartModal startGame={() => setIsStarted(true)}/>}
             <header className={classes.header}>Memory Game</header>
             <article className={classes.console}>
