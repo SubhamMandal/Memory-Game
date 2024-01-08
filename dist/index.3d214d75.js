@@ -27299,7 +27299,8 @@ const Game = ()=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardsDefault.default), {
                 flipMatched: flipHandler,
                 handleWin: winHandler,
-                result: result
+                result: result,
+                isStarted: isStarted
             }, void 0, false, {
                 fileName: "components/Game.js",
                 lineNumber: 59,
@@ -27415,13 +27416,13 @@ const suffleCards = (allCards)=>{
     return cards;
 };
 let suffeledCards = suffleCards((0, _constants.allCards));
-const Cards = ({ flipMatched, handleWin, result })=>{
+const Cards = ({ flipMatched, handleWin, result, isStarted })=>{
     _s();
     const [block, setBlock] = (0, _react.useState)(false);
     const [openedCards, setOpenedCards] = (0, _react.useState)([]);
     const handleFlip = (index)=>{
         const lastCardIndex = openedCards[openedCards.length - 1];
-        if (index === lastCardIndex || openedCards.includes(index) || block) return;
+        if (index === lastCardIndex || openedCards.includes(index) || block || !isStarted) return;
         setOpenedCards((openedCards)=>[
                 ...openedCards,
                 index
@@ -27873,6 +27874,8 @@ module.exports["content"] = `VKUWmq_content`;
 module.exports["emptyStars"] = `VKUWmq_emptyStars`;
 module.exports["restart"] = `VKUWmq_restart`;
 module.exports["result"] = `VKUWmq_result`;
+module.exports["rotate"] = `VKUWmq_rotate`;
+module.exports["rotate"];
 module.exports["stars"] = `VKUWmq_stars`;
 
 },{}],"jMDx3":[function(require,module,exports) {

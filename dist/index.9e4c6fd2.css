@@ -162,6 +162,20 @@ summary {
   bottom: -2rem;
 }
 
+.VKUWmq_restart:hover {
+  animation: 2s linear infinite forwards VKUWmq_rotate;
+}
+
+@keyframes VKUWmq_rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media screen and (width <= 600px) {
   .VKUWmq_banner {
     height: 12rem;

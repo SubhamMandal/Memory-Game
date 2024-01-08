@@ -56,7 +56,7 @@ const Game = () => {
                 <InfoCard infoImg={Flip} value={flipCount} infoTitle={'Flips'} />
                 <InfoCard infoImg={Timer} value={timer} infoTitle={'Timer'} />
             </article>}
-            <Cards flipMatched={flipHandler} handleWin={winHandler} result={result} />
+            <Cards flipMatched={flipHandler} handleWin={winHandler} result={result} isStarted={isStarted}/>
             {result && <Modal score={score} flipCount={flipCount} result={result} reset={resetHandler} />}
         </main>
     );

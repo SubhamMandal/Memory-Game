@@ -13,12 +13,12 @@ const suffleCards = (allCards) => {
 }
 
 let suffeledCards = suffleCards(allCards);
-const Cards = ({ flipMatched, handleWin, result }) => {
+const Cards = ({ flipMatched, handleWin, result, isStarted }) => {
     const [block, setBlock] = useState(false);
     const [openedCards, setOpenedCards] = useState([]);
     const handleFlip = (index) => {
         const lastCardIndex = openedCards[openedCards.length - 1];
-        if (index === lastCardIndex || openedCards.includes(index) || block) return;
+        if (index === lastCardIndex || openedCards.includes(index) || block || !isStarted) return;
         setOpenedCards(openedCards => [...openedCards, index]);
         if (openedCards.length + 1 === suffeledCards.length) {
             handleWin();
