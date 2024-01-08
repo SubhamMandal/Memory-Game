@@ -46,7 +46,7 @@
   }
 
   ._6WX1Ca_header {
-    font-size: 2rem;
+    margin-top: 2rem;
   }
 }
 
@@ -215,8 +215,8 @@ summary {
   align-items: center;
   width: 95vw;
   max-width: 50rem;
-  height: 80vh;
-  max-height: 30rem;
+  height: 90vh;
+  max-height: 35rem;
   display: flex;
   position: absolute;
   top: 50vh;

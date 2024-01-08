@@ -49,13 +49,13 @@ const Game = () => {
 
     return (
         <main className={`${classes.main} ${(result || !isStarted) && classes.fixed}`}>
-            {!isStarted && <StartModal startGame={() => setIsStarted(true)}/>}
+            {!isStarted && <StartModal startGame={() => setIsStarted(true)} />}
             <header className={classes.header}>Memory Game</header>
-            <article className={classes.console}>
+            {isStarted && <article className={classes.console}>
                 <InfoCard infoImg={Medal} value={score} infoTitle={'Score'} />
                 <InfoCard infoImg={Flip} value={flipCount} infoTitle={'Flips'} />
                 <InfoCard infoImg={Timer} value={timer} infoTitle={'Timer'} />
-            </article>
+            </article>}
             <Cards flipMatched={flipHandler} handleWin={winHandler} result={result} />
             {result && <Modal score={score} flipCount={flipCount} result={result} reset={resetHandler} />}
         </main>

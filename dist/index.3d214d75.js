@@ -27260,7 +27260,7 @@ const Game = ()=>{
                 lineNumber: 53,
                 columnNumber: 13
             }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("article", {
+            isStarted && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("article", {
                 className: (0, _gameModuleCssDefault.default).console,
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _infoCardDefault.default), {
@@ -27294,7 +27294,7 @@ const Game = ()=>{
             }, void 0, true, {
                 fileName: "components/Game.js",
                 lineNumber: 54,
-                columnNumber: 13
+                columnNumber: 27
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardsDefault.default), {
                 flipMatched: flipHandler,
